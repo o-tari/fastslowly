@@ -67,6 +67,14 @@ const timerSlice = createSlice({
     },
     updateProtocols: (state, action) => {
       state.protocols = { ...state.protocols, ...action.payload }
+    },
+    modifyStartTime: (state, action) => {
+      if (state.isRunning) {
+        state.startTime = action.payload
+        // Reset pause time and total paused time when modifying start time
+        state.pauseTime = null
+        state.totalPausedTime = 0
+      }
     }
   }
 })
@@ -79,7 +87,8 @@ export const {
   resetTimer,
   setProtocol,
   setCustomDuration,
-  updateProtocols
+  updateProtocols,
+  modifyStartTime
 } = timerSlice.actions
 
 export default timerSlice.reducer

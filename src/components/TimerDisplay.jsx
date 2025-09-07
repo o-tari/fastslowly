@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { startTimer, pauseTimer, resumeTimer, stopTimer, resetTimer } from '../store/slices/timerSlice'
-import { Play, Pause, Square, RotateCcw } from 'lucide-react'
+import { startTimer, pauseTimer, resumeTimer, stopTimer, resetTimer, modifyStartTime } from '../store/slices/timerSlice'
+import { Play, Pause, Square, RotateCcw, Clock } from 'lucide-react'
 import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
+import ModifyStartTimeModal from './ModifyStartTimeModal'
 
 const TimerDisplay = () => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const TimerDisplay = () => {
   
   const [elapsedTime, setElapsedTime] = useState(0)
   const [timeDisplay, setTimeDisplay] = useState('00:00:00')
+  const [showModifyModal, setShowModifyModal] = useState(false)
 
   useEffect(() => {
     let interval = null
@@ -91,6 +93,15 @@ const TimerDisplay = () => {
     setElapsedTime(0)
     setTimeDisplay('00:00:00')
     toast('Timer reset', { icon: '🔄' })
+  }
+
+  const handleModifyStartTime = () => {
+    setShowModifyModal(true)
+  }
+
+  const handleSaveStartTime = (newStartTime) => {
+    dispatch(modifyStartTime(newStartTime))
+    setElapsedTime(0) // Reset elapsed time to recalculate
   }
 
   const progress = getProgress()
@@ -210,6 +221,17 @@ const TimerDisplay = () => {
               <Square className="h-5 w-5" />
               <span>Stop</span>
             </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleModifyStartTime}
+              className="btn-secondary flex items-center space-x-2 px-4 py-3"
+              title="Modify start time"
+            >
+              <Clock className="h-5 w-5" />
+              <span>Modify Start</span>
+            </motion.button>
           </>
         )}
         
@@ -233,6 +255,14 @@ const TimerDisplay = () => {
           {Math.round(progress)}%
         </div>
       </div>
+
+      {/* Modify Start Time Modal */}
+      <ModifyStartTimeModal
+        isOpen={showModifyModal}
+        onClose={() => setShowModifyModal(false)}
+        onSave={handleSaveStartTime}
+        currentStartTime={startTime}
+      />
     </div>
   )
 }
