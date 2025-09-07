@@ -33,7 +33,7 @@ const TimerDisplay = () => {
         
         // Check if target reached
         if (elapsed >= targetDuration) {
-          toast.success('🎉 Fasting goal achieved! Great job!', {
+          toast.success('🎉 Fasting goal achieved!', {
             duration: 6000,
           })
           dispatch(stopTimer())
@@ -74,7 +74,7 @@ const TimerDisplay = () => {
       toast.success('Timer resumed')
     } else {
       dispatch(startTimer())
-      toast.success('Fasting started! You\'ve got this! 💪')
+      toast.success('Fasting started!')
     }
   }
 

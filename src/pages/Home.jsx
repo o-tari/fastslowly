@@ -213,26 +213,6 @@ const Home = () => {
         </div>
       </motion.div>
 
-      {/* Motivational Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.7 }}
-        className="text-center"
-      >
-        <div className="card max-w-2xl mx-auto">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-            Today's Motivation
-          </h3>
-          <blockquote className="text-lg italic text-gray-700 dark:text-gray-300 mb-4">
-            "The body achieves what the mind believes."
-          </blockquote>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Every fasting session is a step towards better health and self-discipline.
-            You've got this! 💪
-          </p>
-        </div>
-      </motion.div>
     </div>
   )
 }

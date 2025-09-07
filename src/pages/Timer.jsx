@@ -39,7 +39,7 @@ const Timer = () => {
           Fasting Timer
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Track your intermittent fasting journey with precision and motivation
+          Track your intermittent fasting journey with precision
         </p>
       </motion.div>
 
@@ -104,22 +104,6 @@ const Timer = () => {
         </div>
       </motion.div>
 
-      {/* Motivational Quote */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
-        className="mt-8 text-center"
-      >
-        <div className="card max-w-2xl mx-auto">
-          <blockquote className="text-lg italic text-gray-700 dark:text-gray-300 mb-2">
-            "The secret of getting ahead is getting started."
-          </blockquote>
-          <cite className="text-sm text-gray-500 dark:text-gray-400">
-            — Mark Twain
-          </cite>
-        </div>
-      </motion.div>
     </div>
   )
 }
