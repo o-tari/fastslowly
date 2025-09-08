@@ -1,18 +1,27 @@
-on:
-  push:
-    branches:
-      - "main" # change to the branch you wish to deploy from
+name: Vite Github Pages Deploy
 
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
 jobs:
-  deploy:
+  # Build job
+  build:
     runs-on: ubuntu-latest
+    environment:
+      name: demo
+      url: ${{ steps.deploy_to_pages.outputs.github_pages_url }}
     steps:
-    - id: build-publish
-      uses: bitovi/github-actions-react-to-github-pages@v1.2.4
-      with:
-        path: build # change to your build folder
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Vite Github Pages Deployer
+        uses: skywarth/vite-github-pages-deployer@master
+        id: deploy_to_pages
