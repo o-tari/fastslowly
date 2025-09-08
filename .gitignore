@@ -34,8 +34,3 @@ dist-ssr
 .firebase
 firebase-debug.log
 firebase-debug.*.log
-
-# PWA
-sw.js.map
-workbox-*.js
-workbox-*.js.map
